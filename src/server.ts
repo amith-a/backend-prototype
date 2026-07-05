@@ -1,11 +1,23 @@
+import env from "../src/config/env";
+import logger from "../src/config/logger";
+import app from "./app";
+import pool from "./config/postgres";
 
-import dotenv from "dotenv"
-import app from "./app"
+async function start() {
+  try {
+    await pool.query("SELECT NOW()");
 
-dotenv.config();
+    console.log("Database Connected");
 
-const PORT  = process.env.PORT || 5000;
+    app.listen(env.PORT, () => {
+      console.log(`Server running on port ${env.PORT}`);
+    });
+  } catch (err) {
+    console.error("Database Connection Failed");
+    console.error(err);
 
-app.listen(PORT,()=>{
-    console.log(`server running on prot ${PORT}`);
-});
+    process.exit(1);
+  }
+}
+
+start();
