@@ -1,8 +1,28 @@
 import pool from "../config/postgres";
 import { CreateUserDto } from "../dto/user/create-user.dto";
-import { User } from "../types/user.types";
+import { AuthUser, User } from "../types/user.types";
 
 class UserRepository {
+  async findAuthUserByEmail(email: string):Promise<AuthUser | null> {
+    const query = `SELECT id,email,password_hash,role_id,name FROM USERS where email=$1`;
+
+    const result = await pool.query(query, [email]);
+
+    if (result.rows.length === 0) {
+      return null;
+    }
+
+    const row = result.rows[0];
+
+    return {
+      id: row.id,
+      roleId: row.role_id,
+      name: row.name,
+      email: row.email,
+      passwordHash: row.password_hash,
+    };
+  }
+
   async findByEmail(email: string): Promise<User | null> {
     const query = `
       SELECT id, role_id, name, email, phone, password_hash, created_at, updated_at
@@ -11,7 +31,9 @@ class UserRepository {
     `;
 
     const result = await pool.query(query, [email]);
-    if (result.rows.length === 0) return null;
+    if (result.rows.length === 0) {
+      return null;
+    }
 
     const row = result.rows[0];
     return {
