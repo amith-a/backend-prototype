@@ -7,6 +7,7 @@
 # Sprint 1 — Project Foundation ✅
 
 ## Topics
+
 - TypeScript
 - Express
 - Project Structure
@@ -17,6 +18,7 @@
 - tsconfig.json
 
 Deliverables
+
 - ✅ Project bootstrapped
 - ✅ Folder structure
 - ✅ Environment configuration
@@ -26,6 +28,7 @@ Deliverables
 # Sprint 2 — Core Infrastructure ✅
 
 ## Topics
+
 - Zod Environment Validation
 - PostgreSQL Connection Pool
 - Singleton Pattern
@@ -33,11 +36,13 @@ Deliverables
 - Database Connection Test
 
 Deliverables
+
 - ✅ env.ts
 - ✅ postgres.ts
 - ✅ Database connectivity
 
 Deferred
+
 - Redis
 - Docker Compose
 - Pino
@@ -48,6 +53,7 @@ Deferred
 # Sprint 3 — Database Design ✅
 
 ## Topics
+
 - Schema Design
 - UUID vs SERIAL
 - Constraints
@@ -59,6 +65,7 @@ Deferred
 - Seed Scripts
 
 Deliverables
+
 - ✅ users
 - ✅ roles
 - ✅ refresh_sessions
@@ -68,6 +75,7 @@ Deliverables
 # Sprint 4 — Application Architecture ✅
 
 ## Topics
+
 - Repository Pattern
 - Service Layer
 - Controllers
@@ -77,6 +85,7 @@ Deliverables
 - Global Error Handling
 
 Deliverables
+
 - ✅ Clean Architecture
 - ✅ Repository Layer
 - ✅ Service Layer
@@ -86,6 +95,7 @@ Deliverables
 # Sprint 5 — Authentication ✅
 
 ## Topics
+
 - bcrypt
 - JWT
 - Authentication Middleware
@@ -121,19 +131,23 @@ Make the project production-ready before building business modules.
 ## Topics
 
 ### Logging
+
 - Pino
 - pino-http
 - Request IDs
 
 ### API Documentation
+
 - Swagger/OpenAPI
 
 ### Testing
+
 - Jest
 - Supertest
 - Authentication Integration Tests
 
 ### Cleanup
+
 - Cookie configuration
 - Consistent API responses
 - Logging strategy
@@ -150,6 +164,7 @@ Deliverables
 # Sprint 7 — Category Module
 
 ## Topics
+
 - CRUD
 - Pagination
 - Filtering

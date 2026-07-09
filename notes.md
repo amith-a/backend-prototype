@@ -1,22 +1,21 @@
-
 backend-prototype/
 │
 ├── src/
-│   ├── app.ts
-│   ├── server.ts
-│   ├── config/
-│   ├── routes/
-│   ├── controllers/
-│   ├── services/
-│   ├── repositories/
-│   ├── middleware/
-│   ├── db/
-│   ├── utils/
-│   ├── validators/
-│   ├── types/
-│   ├── cache/
-│   ├── jobs/
-│   └── workers/
+│ ├── app.ts
+│ ├── server.ts
+│ ├── config/
+│ ├── routes/
+│ ├── controllers/
+│ ├── services/
+│ ├── repositories/
+│ ├── middleware/
+│ ├── db/
+│ ├── utils/
+│ ├── validators/
+│ ├── types/
+│ ├── cache/
+│ ├── jobs/
+│ └── workers/
 │
 ├── package.json
 ├── tsconfig.json
@@ -24,19 +23,17 @@ backend-prototype/
 ├── .gitignore
 └── README.md
 
-
-
 src/
 │
 ├── config/
-│   ├── env.ts
-│   ├── logger.ts
-│   ├── postgres.ts
-│   └── redis.ts
+│ ├── env.ts
+│ ├── logger.ts
+│ ├── postgres.ts
+│ └── redis.ts
 │
 ├── db/
-│   ├── migrations/
-│   └── seeds/
+│ ├── migrations/
+│ └── seeds/
 │
 ├── repositories/
 │
@@ -58,8 +55,7 @@ src/
 │
 └── server.ts
 
-
-----------------------------------------------------------------------------------
+---
 
                 Client
                    │
@@ -67,19 +63,20 @@ src/
                    │
         ┌──────────┼──────────┐
         │          │          │
- Controllers   Middleware   Swagger
-        │
-     Services
-        │
- Repositories
-        │
- PostgreSQL
-        │
- Redis Cache
-        │
- BullMQ Workers
 
-----------------------------------------------------------------------------
+Controllers Middleware Swagger
+│
+Services
+│
+Repositories
+│
+PostgreSQL
+│
+Redis Cache
+│
+BullMQ Workers
+
+---
 
 Sprint 1 Project Foundation
 
@@ -124,7 +121,6 @@ Startup initialization
 Docker Compose
 Health check improvements
 Request logging (pino-http)
-
 
 Sprint 3 Database Design
 
@@ -348,10 +344,9 @@ CORS configuration
 Compression
 Performance tuning
 
-
-
 users
 ----------------------
+
 id
 name
 email
@@ -360,9 +355,9 @@ password_hash
 created_at
 updated_at
 
-
 products
 -------------------------
+
 id
 sku
 name
@@ -374,9 +369,9 @@ is_active
 created_at
 updated_at
 
-
 orders
 -------------------------
+
 id
 user_id
 status
@@ -384,9 +379,9 @@ total_amount
 created_at
 updated_at
 
-
 order_items
 -------------------------
+
 id
 order_id
 product_id

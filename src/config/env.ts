@@ -13,11 +13,11 @@ const envSchema = z.object({
     .enum(["fatal", "error", "warn", "info", "debug", "trace"])
     .default("info"),
   BCRYPT_SALT_ROUNDS: z.coerce.number().int().positive().default(10),
-  JWT_ACCESS_SECRET:z.string().min(18),
-  JWT_ACCESS_EXPIRES_IN:z.string().default("15m"),
-  JWT_REFRESH_SECRET:z.string().min(18),
-  JWT_REFRESH_EXPIRES_IN:z.string().default("7d"),
-  REFRESH_SESSION_DAYS:z.coerce.number().int().positive().default(7),
+  JWT_ACCESS_SECRET: z.string().min(18),
+  JWT_ACCESS_EXPIRES_IN: z.string().default("15m"),
+  JWT_REFRESH_SECRET: z.string().min(18),
+  JWT_REFRESH_EXPIRES_IN: z.string().default("7d"),
+  REFRESH_SESSION_DAYS: z.coerce.number().int().positive().default(7),
 });
 
 const env = envSchema.parse(process.env);

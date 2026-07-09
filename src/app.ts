@@ -3,10 +3,8 @@ import cors from "cors";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 
-
 import authRoutes from "./routes/auth.route";
 import errorMiddleware from "./middleware/error.middleware";
-
 
 const app = express();
 
@@ -21,8 +19,6 @@ app.get("/api/v1/health", (_req, res) => {
     timestamp: new Date(),
   });
 });
-
-
 
 app.use("/api/v1/auth", authRoutes);
 

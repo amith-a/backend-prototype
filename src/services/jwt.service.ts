@@ -14,7 +14,9 @@ class JwtService {
   }
 
   getRefreshTokenExpiryDate(): Date {
-    return new Date(Date.now() + env.REFRESH_SESSION_DAYS * 24 * 60 * 60 * 1000);
+    return new Date(
+      Date.now() + env.REFRESH_SESSION_DAYS * 24 * 60 * 60 * 1000,
+    );
   }
 
   generateAccessToken(payload: JwtPayload): string {
@@ -36,7 +38,7 @@ class JwtService {
       env.JWT_REFRESH_EXPIRES_IN,
     );
   }
-  
+
   verifyRefreshToken(token: string): JwtPayload {
     return this.verifyToken(token, env.JWT_REFRESH_SECRET);
   }
