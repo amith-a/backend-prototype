@@ -11,6 +11,7 @@ import { Role } from "../constants/roles";
 import { CurrentUserDto } from "../dto/user/current-user.dto";
 import { hashToken } from "../utils/hash";
 import refreshSessionRepository from "../repositories/refresh-session.repository";
+import logger from "../config/logger";
 
 class AuthService {
   private async hashPassword(password: string): Promise<string> {
@@ -57,6 +58,12 @@ class AuthService {
       expiresAt: jwtService.getRefreshTokenExpiryDate(),
     });
 
+    logger.info(
+      {
+        userId: user.id,
+      },
+      "User logged in",
+    );
     return {
       accessToken,
       refreshToken,
@@ -111,6 +118,13 @@ class AuthService {
       expiresAt: jwtService.getRefreshTokenExpiryDate(),
     });
 
+    logger.info(
+      {
+        userId: payload.sub,
+      },
+      "Refresh token rotated",
+    );
+
     return {
       accessToken,
       refreshToken: newRefreshToken,
@@ -125,7 +139,12 @@ class AuthService {
     if (!session) {
       return;
     }
-
+    logger.info(
+      {
+        userId: session.userId,
+      },
+      "User logged out",
+    );
     await refreshSessionRepository.revoke(session.id);
   }
 
@@ -146,6 +165,14 @@ class AuthService {
     };
 
     const createdUser = await userRepository.create(createUserDto);
+
+    logger.info(
+      {
+        userId: createdUser.id,
+        email: createdUser.email,
+      },
+      "User registered",
+    );
 
     return {
       id: createdUser.id,

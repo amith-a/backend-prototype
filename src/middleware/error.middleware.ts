@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import AppError from "../errors/app-error";
+import logger from "../config/logger";
 
 const errorMiddleware = (
   err: unknown,
@@ -13,7 +14,7 @@ const errorMiddleware = (
       message: err.message,
     });
   }
-  console.error(err);
+  logger.error(err);
   return res.status(500).json({
     success: false,
     message: "Internal Server Error",
