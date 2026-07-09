@@ -51,8 +51,49 @@ WHERE token_hash = $1;`;
     };
   }
 
+  async rotateSession(
+    oldSessionId: string,
+    newSession: CreateRefreshSession,
+  ): Promise<void> {
+    const client = await pool.connect();
+
+    try {
+      await client.query("BEGIN");
+
+      await client.query(
+        `
+      INSERT INTO refresh_sessions (
+        user_id,
+        token_hash,
+        expires_at
+      )
+      VALUES ($1, $2, $3)
+      `,
+        [newSession.userId, newSession.tokenHash, newSession.expiresAt],
+      );
+
+      await client.query(
+        `
+      UPDATE refresh_sessions
+      SET
+        revoked_at = NOW(),
+        updated_at = NOW()
+      WHERE id = $1
+      `,
+        [oldSessionId],
+      );
+
+      await client.query("COMMIT");
+    } catch (error) {
+      await client.query("ROLLBACK");
+      throw error;
+    } finally {
+      client.release();
+    }
+  }
+
   async revoke(sessionId: string): Promise<void> {
-  const query = `
+    const query = `
     UPDATE refresh_sessions
     SET
       revoked_at = NOW(),
@@ -60,8 +101,7 @@ WHERE token_hash = $1;`;
     WHERE id = $1;
   `;
 
-  await pool.query(query, [sessionId]);
-}
-
+    await pool.query(query, [sessionId]);
+  }
 }
 export default new RefreshSessionRepository();

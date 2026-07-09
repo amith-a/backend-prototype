@@ -1,5 +1,4 @@
 import env from "../src/config/env";
-import logger from "../src/config/logger";
 import app from "./app";
 import pool from "./config/postgres";
 

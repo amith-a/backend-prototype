@@ -4,6 +4,7 @@ import authService from "../services/auth.service";
 import { LoginUserDto } from "../dto/user/login-user.dto";
 import env from "../config/env";
 import AppError from "../errors/app-error";
+import { refreshCookieOptions } from "../config/cookie";
 
 class AuthController {
   async login(
@@ -14,13 +15,7 @@ class AuthController {
     try {
       const { refreshToken, ...response } = await authService.login(req.body);
 
-      res.cookie("refreshToken", refreshToken, {
-        httpOnly: true,
-        secure: env.NODE_ENV === "production",
-        path: "/api/v1/auth/refresh",
-        maxAge: env.REFRESH_SESSION_DAYS * 24 * 60 * 60 * 1000,
-        sameSite: "strict",
-      });
+      res.cookie("refreshToken", refreshToken, refreshCookieOptions);
 
       return res.status(200).json({
         success: true,
@@ -42,13 +37,7 @@ class AuthController {
       const { refreshToken: newRefreshToken, accessToken } =
         await authService.refreshAccessToken(refreshToken);
 
-      res.cookie("refreshToken", newRefreshToken, {
-        httpOnly: true,
-        secure: env.NODE_ENV === "production",
-        sameSite: "strict",
-        path: "/api/v1/auth/refresh",
-        maxAge: env.REFRESH_SESSION_DAYS * 24 * 60 * 60 * 1000,
-      });
+      res.cookie("refreshToken", refreshToken, refreshCookieOptions);
 
       return res.json({
         success: true,
@@ -69,12 +58,7 @@ class AuthController {
         await authService.logout(refreshToken);
       }
 
-      res.clearCookie("refreshToken", {
-        httpOnly: true,
-        secure: env.NODE_ENV === "production",
-        sameSite: "strict",
-        path: "/api/v1/auth/refresh",
-      });
+      res.clearCookie("refreshToken", refreshCookieOptions);
 
       return res.sendStatus(204);
     } catch (error) {

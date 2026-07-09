@@ -1,128 +1,309 @@
 # Backend Learning Roadmap (Memory File)
 
-## Sprint 1 --- Project Foundation ✅
+> Goal: Build a production-ready backend using Node.js, TypeScript, Express, PostgreSQL, and raw SQL while learning real backend engineering practices.
 
--   TypeScript
--   Express
--   Project structure
--   tsx
--   Environment variables
--   app.ts, server.ts, tsconfig.json
+---
 
-## Sprint 2 --- Core Infrastructure ✅
+# Sprint 1 — Project Foundation ✅
 
--   Zod environment validation
--   PostgreSQL pool
--   Singleton pattern
--   Database connection test
+## Topics
+- TypeScript
+- Express
+- Project Structure
+- tsx
+- Environment Variables
+- app.ts
+- server.ts
+- tsconfig.json
 
-Deferred: - Pino - Redis - Docker Compose - pino-http
+Deliverables
+- ✅ Project bootstrapped
+- ✅ Folder structure
+- ✅ Environment configuration
 
-## Sprint 3 --- Database Design ✅
+---
 
--   Schema design
--   Foreign keys
--   Constraints
--   Indexes
--   Raw SQL migrations
--   Seed scripts
+# Sprint 2 — Core Infrastructure ✅
 
-## Sprint 4 --- Application Architecture ✅
+## Topics
+- Zod Environment Validation
+- PostgreSQL Connection Pool
+- Singleton Pattern
+- Configuration Management
+- Database Connection Test
 
--   Repository Pattern
--   Service Layer
--   Controllers
--   DTOs
--   Validation
--   Global Error Handling
+Deliverables
+- ✅ env.ts
+- ✅ postgres.ts
+- ✅ Database connectivity
 
-## Sprint 5 --- Authentication 🚧
+Deferred
+- Redis
+- Docker Compose
+- Pino
+- pino-http
 
-Completed: - Register - Login - bcrypt - JWT Service - Validation
-Middleware - Authentication Middleware - Authorization Middleware -
-Protected Routes
+---
 
-Remaining: - Role enum - GET /me - Authentication cleanup
+# Sprint 3 — Database Design ✅
 
-## Sprint 6 --- Token Management
+## Topics
+- Schema Design
+- UUID vs SERIAL
+- Constraints
+- Foreign Keys
+- Indexes
+- Naming Conventions
+- Audit Columns
+- Raw SQL Migrations
+- Seed Scripts
 
--   Refresh Tokens
--   Token Rotation
--   Logout
--   Revocation
--   Cookie vs Local Storage
+Deliverables
+- ✅ users
+- ✅ roles
+- ✅ refresh_sessions
 
-## Sprint 7 --- Category Module
+---
 
--   CRUD
--   Pagination
--   Filtering
--   Search
+# Sprint 4 — Application Architecture ✅
 
-## Sprint 8 --- Product Module
+## Topics
+- Repository Pattern
+- Service Layer
+- Controllers
+- DTOs
+- Types
+- Validation
+- Global Error Handling
 
--   CRUD
--   Image Upload
--   Inventory
+Deliverables
+- ✅ Clean Architecture
+- ✅ Repository Layer
+- ✅ Service Layer
 
-## Sprint 9 --- Cart Module
+---
 
--   Cart operations
--   Business rules
+# Sprint 5 — Authentication ✅
 
-## Sprint 10 --- Orders
+## Topics
+- bcrypt
+- JWT
+- Authentication Middleware
+- Authorization Middleware
+- HttpOnly Cookies
+- Refresh Tokens
+- Session-based Authentication
 
--   Transactions
--   BEGIN / COMMIT / ROLLBACK
--   Stock validation
+Completed
 
-## Sprint 11 --- Redis
+- ✅ Register
+- ✅ Login
+- ✅ Password Hashing
+- ✅ JWT Service
+- ✅ Access Tokens
+- ✅ Refresh Tokens
+- ✅ Authentication Middleware
+- ✅ Authorization Middleware
+- ✅ GET /me
+- ✅ Refresh Sessions
+- ✅ Refresh Token Rotation
+- ✅ Logout
+- ✅ Session Revocation
+- ✅ Transaction-based Session Rotation
 
--   Cache Aside
--   TTL
--   Cache Invalidation
+---
 
-## Sprint 12 --- BullMQ
+# Sprint 6 — API Quality 🚧
 
--   Workers
--   Retry
--   Delayed Jobs
+Goal:
+Make the project production-ready before building business modules.
 
-## Sprint 13 --- API Quality
+## Topics
 
--   Swagger / OpenAPI
+### Logging
+- Pino
+- pino-http
+- Request IDs
 
-## Sprint 14 --- Observability
+### API Documentation
+- Swagger/OpenAPI
 
--   Pino
--   pino-http
--   Request IDs
--   Rate Limiting
--   Security Headers
+### Testing
+- Jest
+- Supertest
+- Authentication Integration Tests
 
-## Sprint 15 --- Docker
+### Cleanup
+- Cookie configuration
+- Consistent API responses
+- Logging strategy
 
--   Dockerfile
--   Docker Compose
--   Multi-stage builds
+Deliverables
 
-## Sprint 16 --- Deployment
+- logger.ts
+- request logger middleware
+- Swagger documentation
+- Auth integration tests
 
--   EC2
--   Railway
--   Render
--   Nginx
--   HTTPS
+---
 
-## Sprint 17 --- Production Hardening
+# Sprint 7 — Category Module
 
--   Graceful shutdown
--   Monitoring
--   Performance tuning
+## Topics
+- CRUD
+- Pagination
+- Filtering
+- Searching
+- Validation
+- Soft Delete
 
-## Sprint 18 --- Testing
+Endpoints
 
--   Jest
--   Supertest
--   Unit tests
--   Integration tests
+GET /categories
+
+GET /categories/:id
+
+POST /categories
+
+PUT /categories/:id
+
+DELETE /categories/:id
+
+---
+
+# Sprint 8 — Product Module
+
+## Topics
+
+- CRUD
+- Product Images
+- Inventory
+- Category Relationship
+- Pagination
+- Filtering
+- Search
+- Sorting
+
+Endpoints
+
+GET /products
+
+GET /products/:id
+
+POST /products
+
+PUT /products/:id
+
+DELETE /products/:id
+
+---
+
+# Sprint 9 — Cart Module
+
+## Topics
+
+- Cart Operations
+- Business Rules
+- Quantity Validation
+- Price Calculation
+
+---
+
+# Sprint 10 — Orders
+
+## Topics
+
+- Transactions
+- BEGIN
+- COMMIT
+- ROLLBACK
+- Stock Validation
+- Order Creation
+- Order Items
+
+---
+
+# Sprint 11 — Redis
+
+## Topics
+
+- Cache Aside
+- TTL
+- Cache Invalidation
+- Key Design
+
+---
+
+# Sprint 12 — BullMQ
+
+## Topics
+
+- Background Jobs
+- Workers
+- Retry
+- Delayed Jobs
+
+Examples
+
+- Email Queue
+- Inventory Sync
+- Notifications
+
+---
+
+# Sprint 13 — Docker
+
+## Topics
+
+- Dockerfile
+- Docker Compose
+- Multi-stage Builds
+- Environment Variables
+
+---
+
+# Sprint 14 — Deployment
+
+Deploy To
+
+- EC2
+- Railway
+- Render
+
+Topics
+
+- Nginx
+- Reverse Proxy
+- HTTPS
+- PM2
+- Production Environment Variables
+
+---
+
+# Sprint 15 — Production Hardening
+
+## Topics
+
+- Graceful Shutdown
+- Structured Logging
+- Security Headers
+- Rate Limiting
+- Compression
+- Monitoring
+- Performance Tuning
+
+---
+
+# Project Principles
+
+- Repository contains SQL only.
+- Service contains business logic only.
+- Controller handles HTTP only.
+- DTOs represent API contracts.
+- Types represent internal application models.
+- Use parameterized SQL everywhere.
+- Use transactions for multi-step database operations.
+- Never store raw refresh tokens.
+- Hash refresh tokens with SHA-256.
+- Hash passwords with bcrypt.
+- Keep authentication stateless for access tokens and stateful for refresh sessions.

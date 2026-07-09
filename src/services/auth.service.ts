@@ -9,7 +9,6 @@ import { AuthUser } from "../types/user.types";
 import jwtService from "./jwt.service";
 import { Role } from "../constants/roles";
 import { CurrentUserDto } from "../dto/user/current-user.dto";
-import { JwtPayload } from "../types/auth.types";
 import { hashToken } from "../utils/hash";
 import refreshSessionRepository from "../repositories/refresh-session.repository";
 
@@ -70,11 +69,11 @@ class AuthService {
     };
   }
 
-  async refreshAccessToken(token: string): Promise<{
+  async refreshAccessToken(refreshToken: string): Promise<{
     accessToken: string;
     refreshToken: string;
   }> {
-    const tokenHash = hashToken(token);
+    const tokenHash = hashToken(refreshToken);
 
     const session = await refreshSessionRepository.findByTokenHash(tokenHash);
 
@@ -90,7 +89,7 @@ class AuthService {
       throw new AppError("Refresh token expired", 401);
     }
 
-    const payload = jwtService.verifyRefreshToken(token);
+    const payload = jwtService.verifyRefreshToken(refreshToken);
 
     if (session.userId !== payload.sub) {
       throw new AppError("Invalid refresh token", 401);
@@ -101,22 +100,20 @@ class AuthService {
       roleId: payload.roleId,
     });
 
-    const refreshToken = jwtService.generateRefreshToken({
+    const newRefreshToken = jwtService.generateRefreshToken({
       sub: payload.sub,
       roleId: payload.roleId,
     });
 
-    await refreshSessionRepository.create({
+    await refreshSessionRepository.rotateSession(session.id, {
       userId: payload.sub,
-      tokenHash: hashToken(refreshToken),
+      tokenHash: hashToken(newRefreshToken),
       expiresAt: jwtService.getRefreshTokenExpiryDate(),
     });
 
-    await refreshSessionRepository.revoke(session.id);
-
     return {
       accessToken,
-      refreshToken,
+      refreshToken: newRefreshToken,
     };
   }
 
