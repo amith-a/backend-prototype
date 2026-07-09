@@ -16,3 +16,10 @@ export interface AuthUser {
   roleId: number;
   passwordHash: string;
 }
+
+export interface UserProfile {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+}

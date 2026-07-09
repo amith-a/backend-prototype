@@ -3,18 +3,43 @@ import { JwtPayload } from "../types/auth.types";
 import env from "../config/env";
 
 class JwtService {
-  generateAccessToken(payload: JwtPayload): string {
-    return jwt.sign(payload, env.JWT_SECRET, {
-      expiresIn: env.JWT_EXPIRES_IN as SignOptions["expiresIn"],
+  private signToken(payload: JwtPayload, secret: string, expiresIn: string) {
+    return jwt.sign(payload, secret, {
+      expiresIn: expiresIn as SignOptions["expiresIn"],
     });
   }
 
-  verifyAccessToken(token: string): JwtPayload {
-    return jwt.verify(token, env.JWT_SECRET) as JwtPayload;
+  private verifyToken(token: string, secret: string): JwtPayload {
+    return jwt.verify(token, secret) as JwtPayload;
   }
 
-  //   async generateRefreshToken(){}
-  //   async verifyRefreshToken(){}
+  getRefreshTokenExpiryDate(): Date {
+    return new Date(Date.now() + env.REFRESH_SESSION_DAYS * 24 * 60 * 60 * 1000);
+  }
+
+  generateAccessToken(payload: JwtPayload): string {
+    return this.signToken(
+      payload,
+      env.JWT_ACCESS_SECRET,
+      env.JWT_ACCESS_EXPIRES_IN,
+    );
+  }
+
+  verifyAccessToken(token: string): JwtPayload {
+    return this.verifyToken(token, env.JWT_ACCESS_SECRET);
+  }
+
+  generateRefreshToken(payload: JwtPayload): string {
+    return this.signToken(
+      payload,
+      env.JWT_REFRESH_SECRET,
+      env.JWT_REFRESH_EXPIRES_IN,
+    );
+  }
+  
+  verifyRefreshToken(token: string): JwtPayload {
+    return this.verifyToken(token, env.JWT_REFRESH_SECRET);
+  }
 }
 
 export default new JwtService();

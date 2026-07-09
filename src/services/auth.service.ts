@@ -4,13 +4,14 @@ import { RegisterUserDto } from "../dto/user/register-user.dto";
 import { CreateUserDto } from "../dto/user/create-user.dto";
 import userRepository from "../repositories/user.repository";
 import AppError from "../errors/app-error";
-import { LoginUserDto } from "../dto/user/login-user.dto";
+import { LoginResponseDto, LoginUserDto } from "../dto/user/login-user.dto";
 import { AuthUser } from "../types/user.types";
-import { is } from "zod/v4/locales";
-import { jwt } from "zod";
 import jwtService from "./jwt.service";
-
-const CUSTOMER_ROLE_ID = 1;
+import { Role } from "../constants/roles";
+import { CurrentUserDto } from "../dto/user/current-user.dto";
+import { JwtPayload } from "../types/auth.types";
+import { hashToken } from "../utils/hash";
+import refreshSessionRepository from "../repositories/refresh-session.repository";
 
 class AuthService {
   private async hashPassword(password: string): Promise<string> {
@@ -24,7 +25,7 @@ class AuthService {
     return bcrypt.compare(password, hashedPassword);
   }
 
-  async login(dto: LoginUserDto) {
+  async login(dto: LoginUserDto): Promise<LoginResponseDto> {
     const user: AuthUser | null = await userRepository.findAuthUserByEmail(
       dto.email,
     );
@@ -46,8 +47,20 @@ class AuthService {
       roleId: user.roleId,
     });
 
+    const refreshToken = jwtService.generateRefreshToken({
+      sub: user.id,
+      roleId: user.roleId,
+    });
+
+    await refreshSessionRepository.create({
+      userId: user.id,
+      tokenHash: hashToken(refreshToken),
+      expiresAt: jwtService.getRefreshTokenExpiryDate(),
+    });
+
     return {
       accessToken,
+      refreshToken,
       user: {
         id: user.id,
         name: user.name,
@@ -55,6 +68,68 @@ class AuthService {
         roleId: user.roleId,
       },
     };
+  }
+
+  async refreshAccessToken(token: string): Promise<{
+    accessToken: string;
+    refreshToken: string;
+  }> {
+    const tokenHash = hashToken(token);
+
+    const session = await refreshSessionRepository.findByTokenHash(tokenHash);
+
+    if (!session) {
+      throw new AppError("Invalid refresh token", 401);
+    }
+
+    if (session.revokedAt) {
+      throw new AppError("Refresh token revoked", 401);
+    }
+
+    if (session.expiresAt < new Date()) {
+      throw new AppError("Refresh token expired", 401);
+    }
+
+    const payload = jwtService.verifyRefreshToken(token);
+
+    if (session.userId !== payload.sub) {
+      throw new AppError("Invalid refresh token", 401);
+    }
+
+    const accessToken = jwtService.generateAccessToken({
+      sub: payload.sub,
+      roleId: payload.roleId,
+    });
+
+    const refreshToken = jwtService.generateRefreshToken({
+      sub: payload.sub,
+      roleId: payload.roleId,
+    });
+
+    await refreshSessionRepository.create({
+      userId: payload.sub,
+      tokenHash: hashToken(refreshToken),
+      expiresAt: jwtService.getRefreshTokenExpiryDate(),
+    });
+
+    await refreshSessionRepository.revoke(session.id);
+
+    return {
+      accessToken,
+      refreshToken,
+    };
+  }
+
+  async logout(token: string): Promise<void> {
+    const tokenHash = hashToken(token);
+
+    const session = await refreshSessionRepository.findByTokenHash(tokenHash);
+
+    if (!session) {
+      return;
+    }
+
+    await refreshSessionRepository.revoke(session.id);
   }
 
   async register(dto: RegisterUserDto) {
@@ -67,7 +142,7 @@ class AuthService {
     const passwordHash = await this.hashPassword(dto.password);
 
     const createUserDto: CreateUserDto = {
-      roleId: CUSTOMER_ROLE_ID,
+      roleId: Role.CUSTOMER,
       name: dto.name,
       email: dto.email,
       passwordHash,
@@ -80,6 +155,21 @@ class AuthService {
       name: createdUser.name,
       email: createdUser.email,
     };
+  }
+
+  async getCurrentUser(userId: string) {
+    const user = await userRepository.findById(userId);
+
+    if (!user) {
+      throw new AppError("User not found", 404);
+    }
+
+    return {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    } satisfies CurrentUserDto;
   }
 }
 
