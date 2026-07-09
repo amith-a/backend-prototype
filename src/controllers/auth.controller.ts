@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from "express";
 import { RegisterUserDto } from "../dto/user/register-user.dto";
 import authService from "../services/auth.service";
 import { LoginUserDto } from "../dto/user/login-user.dto";
-import env from "../config/env";
 import AppError from "../errors/app-error";
 import { refreshCookieOptions } from "../config/cookie";
 
@@ -37,7 +36,7 @@ class AuthController {
       const { refreshToken: newRefreshToken, accessToken } =
         await authService.refreshAccessToken(refreshToken);
 
-      res.cookie("refreshToken", refreshToken, refreshCookieOptions);
+      res.cookie("refreshToken", newRefreshToken, refreshCookieOptions);
 
       return res.json({
         success: true,
