@@ -30,6 +30,12 @@ class AuthService {
       dto.email,
     );
     if (!user) {
+      logger.warn(
+        {
+          email: dto.email,
+        },
+        "Login failed: invalid credentials",
+      );
       throw new AppError("Invalid email or password", 401);
     }
 
@@ -39,6 +45,12 @@ class AuthService {
     );
 
     if (!isValidPassword) {
+      logger.warn(
+        {
+          email: dto.email,
+        },
+        "Login failed: invalid credentials",
+      );
       throw new AppError("Invalid email or password", 401);
     }
 
