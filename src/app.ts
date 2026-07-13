@@ -5,8 +5,16 @@ import cookieParser from "cookie-parser";
 
 import authRoutes from "./routes/auth.route";
 import errorMiddleware from "./middleware/error.middleware";
+import requestLogger from "./middleware/requestLogger.middleware";
+import swaggerUi from "swagger-ui-express";
+import swaggerSpec from "./docs/swagger";
+import env from "./config/env";
 
 const app = express();
+
+if (env.NODE_ENV !== "test") {
+  app.use(requestLogger);
+}
 
 app.use(cors());
 app.use(helmet());
@@ -19,6 +27,8 @@ app.get("/api/v1/health", (_req, res) => {
     timestamp: new Date(),
   });
 });
+
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use("/api/v1/auth", authRoutes);
 

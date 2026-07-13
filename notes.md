@@ -388,3 +388,16 @@ product_id
 quantity
 unit_price
 created_at
+
+
+□ Migration
+□ Repository
+□ Service
+□ Controller
+□ Route
+□ Validation
+□ Swagger
+□ Logging
+□ Integration Tests
+□ Manual verification (Postman/Swagger)
+□ Commit
