@@ -80,7 +80,6 @@ describe("POST /api/v1/auth/register", () => {
     expect(response.body.success).toBe(false);
     expect(response.body.message).toBe("Email already exists");
 
-
     // Assert - Database
     const result = await pool.query(
       `

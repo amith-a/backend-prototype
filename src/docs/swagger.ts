@@ -4,10 +4,7 @@ import swaggerDefinition from "./openapi";
 const options = {
   definition: swaggerDefinition,
 
-  apis: [
-    "./src/routes/*.ts",
-    "./src/controllers/*.ts",
-  ],
+  apis: ["./src/routes/*.ts", "./src/controllers/*.ts"],
 };
 
 const swaggerSpec = swaggerJsdoc(options);

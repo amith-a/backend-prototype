@@ -28,12 +28,10 @@ describe("POST /api/v1/auth/login", () => {
     expect(registerResponse.status).toBe(201);
 
     // Act
-    const response = await request(app)
-      .post("/api/v1/auth/login")
-      .send({
-        email: payload.email,
-        password: payload.password,
-      });
+    const response = await request(app).post("/api/v1/auth/login").send({
+      email: payload.email,
+      password: payload.password,
+    });
 
     // Assert - HTTP
     expect(response.status).toBe(200);
@@ -54,9 +52,7 @@ describe("POST /api/v1/auth/login", () => {
     expect(response.headers["set-cookie"]).toBeDefined();
 
     expect(response.headers["set-cookie"]).toEqual(
-      expect.arrayContaining([
-        expect.stringContaining("refreshToken="),
-      ]),
+      expect.arrayContaining([expect.stringContaining("refreshToken=")]),
     );
 
     // Assert - Refresh Session
@@ -96,16 +92,12 @@ describe("POST /api/v1/auth/login", () => {
       password: "Password@123",
     };
 
-    await request(app)
-      .post("/api/v1/auth/register")
-      .send(payload);
+    await request(app).post("/api/v1/auth/register").send(payload);
 
-    const response = await request(app)
-      .post("/api/v1/auth/login")
-      .send({
-        email: payload.email,
-        password: "WrongPassword@123",
-      });
+    const response = await request(app).post("/api/v1/auth/login").send({
+      email: payload.email,
+      password: "WrongPassword@123",
+    });
 
     expect(response.status).toBe(401);
     expect(response.body.success).toBe(false);
@@ -130,12 +122,10 @@ describe("POST /api/v1/auth/login", () => {
   });
 
   it("should reject missing email", async () => {
-    const response = await request(app)
-      .post("/api/v1/auth/login")
-      .send({
-        email: "",
-        password: "Password@123",
-      });
+    const response = await request(app).post("/api/v1/auth/login").send({
+      email: "",
+      password: "Password@123",
+    });
 
     expect(response.status).toBe(400);
     expect(response.body.success).toBe(false);

@@ -1,7 +1,7 @@
 export interface JwtPayload {
   sub: string;
   roleId: number;
-  jti?:string;
+  jti?: string;
 }
 
 export interface AuthRequestUser {

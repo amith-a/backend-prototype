@@ -93,8 +93,6 @@ class AuthController {
       next(error);
     }
   }
-
-  
 }
 
 export default new AuthController();

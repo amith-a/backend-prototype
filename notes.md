@@ -389,7 +389,6 @@ quantity
 unit_price
 created_at
 
-
 □ Migration
 □ Repository
 □ Service

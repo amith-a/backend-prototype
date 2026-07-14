@@ -34,9 +34,9 @@ class JwtService {
   generateRefreshToken(payload: JwtPayload): string {
     return this.signToken(
       {
-      ...payload,
-      jti: crypto.randomUUID(),
-    },
+        ...payload,
+        jti: crypto.randomUUID(),
+      },
       env.JWT_REFRESH_SECRET,
       env.JWT_REFRESH_EXPIRES_IN,
     );
