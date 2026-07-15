@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import bcrypt from "bcrypt";
 import pool from "../src/config/postgres";
 import env from "../src/config/env";
