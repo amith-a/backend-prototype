@@ -3,9 +3,10 @@ import cors from "cors";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 
-import authRoutes from "./routes/auth.route";
-import errorMiddleware from "./middleware/error.middleware";
-import requestLogger from "./middleware/requestLogger.middleware";
+import authRoutes from "./routes/auth.routes";
+import categoryRoutes from "./routes/category.routes";
+import errorMiddleware from "./middlewares/error.middleware";
+import requestLogger from "./middlewares/requestLogger.middleware";
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./docs/swagger";
 import env from "./config/env";
@@ -31,6 +32,8 @@ app.get("/api/v1/health", (_req, res) => {
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use("/api/v1/auth", authRoutes);
+
+app.use("/api/v1/categories", categoryRoutes);
 
 app.use((_req, res) => {
   res.status(404).json({

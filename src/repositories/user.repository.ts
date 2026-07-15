@@ -76,8 +76,15 @@ WHERE u.id = $1;`;
     const query = `
       INSERT INTO users (role_id, name, email, password_hash)
       VALUES ($1, $2, $3, $4)
-      RETURNING id, 
-role_id, name, email, phone, password_hash, created_at, updated_at;
+      RETURNING 
+      id, 
+      role_id, 
+      name, 
+      email, 
+      phone, 
+      password_hash, 
+      created_at, 
+      updated_at;
     `;
 
     const result = await pool.query(query, [
