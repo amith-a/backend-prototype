@@ -4,6 +4,7 @@ import authenticate from "../middlewares/auth.middleware";
 import authorize from "../middlewares/authorize.middleware";
 import { Role } from "../constants/roles";
 import validate from "../middlewares/validate.middleware";
+import { asyncHandler } from "../middlewares/async-handler.middleware";
 import {
   createCategorySchema,
   getCategorySchema,
@@ -14,15 +15,19 @@ const router = Router();
 
 router.use(authenticate);
 
-router.get("/", categoryController.getAll);
+router.get("/", asyncHandler(categoryController.getAll));
 
-router.get("/:id", validate(getCategorySchema), categoryController.getById);
+router.get(
+  "/:id",
+  validate(getCategorySchema),
+  asyncHandler(categoryController.getById),
+);
 
 router.post(
   "/",
   authorize([Role.ADMIN]),
   validate(createCategorySchema),
-  categoryController.create,
+  asyncHandler(categoryController.create),
 );
 
 router.patch(
@@ -30,14 +35,14 @@ router.patch(
   authorize([Role.ADMIN]),
   validate(getCategorySchema),
   validate(updateCategorySchema),
-  categoryController.update,
+  asyncHandler(categoryController.update),
 );
 
 router.delete(
   "/:id",
   authorize([Role.ADMIN]),
   validate(getCategorySchema),
-  categoryController.delete,
+  asyncHandler(categoryController.delete),
 );
 
 export default router;

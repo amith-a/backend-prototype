@@ -5,6 +5,7 @@ import productController from "../controllers/product.controller";
 import authenticate from "../middlewares/auth.middleware";
 import authorize from "../middlewares/authorize.middleware";
 import validate from "../middlewares/validate.middleware";
+import { asyncHandler } from "../middlewares/async-handler.middleware";
 
 import { Role } from "../constants/roles";
 
@@ -24,25 +25,33 @@ router.post(
   "/",
   authorize([Role.ADMIN]),
   validate(createProductSchema),
-  productController.create,
+  asyncHandler(productController.create),
 );
 
-router.get("/", validate(listProductsSchema), productController.getAll);
+router.get(
+  "/",
+  validate(listProductsSchema),
+  asyncHandler(productController.getAll),
+);
 
-router.get("/:id", validate(getProductSchema), productController.getById);
+router.get(
+  "/:id",
+  validate(getProductSchema),
+  asyncHandler(productController.getById),
+);
 
 router.patch(
   "/:id",
   authorize([Role.ADMIN]),
   validate(updateProductSchema),
-  productController.update,
+  asyncHandler(productController.update),
 );
 
 router.delete(
   "/:id",
   authorize([Role.ADMIN]),
   validate(deleteProductSchema),
-  productController.delete,
+  asyncHandler(productController.delete),
 );
 
 export default router;

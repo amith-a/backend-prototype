@@ -20,7 +20,7 @@ describe("DELETE /api/v1/cart", () => {
     const { accessToken, user } = await createCustomer();
 
     const categoryResult = await pool.query(
-       `
+      `
       INSERT INTO categories(name)
       VALUES ($1)
       RETURNING id;
@@ -72,9 +72,7 @@ describe("DELETE /api/v1/cart", () => {
 
     expect(response.body.success).toBe(true);
 
-    expect(response.body.message).toBe(
-      "Cart cleared successfully",
-    );
+    expect(response.body.message).toBe("Cart cleared successfully");
 
     const result = await pool.query(
       `
@@ -102,14 +100,11 @@ describe("DELETE /api/v1/cart", () => {
 
     expect(response.body.success).toBe(true);
 
-    expect(response.body.message).toBe(
-      "Cart cleared successfully",
-    );
+    expect(response.body.message).toBe("Cart cleared successfully");
   });
 
   it("should reject unauthenticated request", async () => {
-    const response = await request(app)
-      .delete("/api/v1/cart");
+    const response = await request(app).delete("/api/v1/cart");
 
     expect(response.status).toBe(401);
 

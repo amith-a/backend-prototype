@@ -4,6 +4,7 @@ import cartController from "../controllers/cart.controller";
 
 import authenticate from "../middlewares/auth.middleware";
 import validate from "../middlewares/validate.middleware";
+import { asyncHandler } from "../middlewares/async-handler.middleware";
 
 import {
   addCartItemSchema,
@@ -13,29 +14,29 @@ import {
 
 const router = Router();
 
-router.get("/", authenticate, cartController.getCart);
+router.get("/", authenticate, asyncHandler(cartController.getCart));
 
 router.post(
   "/items",
   authenticate,
   validate(addCartItemSchema),
-  cartController.addItem,
+  asyncHandler(cartController.addItem),
 );
 
 router.patch(
   "/items/:productId",
   authenticate,
   validate(updateCartItemSchema),
-  cartController.updateItem,
+  asyncHandler(cartController.updateItem),
 );
 
 router.delete(
   "/items/:productId",
   authenticate,
   validate(removeCartItemSchema),
-  cartController.removeItem,
+  asyncHandler(cartController.removeItem),
 );
 
-router.delete("/", authenticate, cartController.clearCart);
+router.delete("/", authenticate, asyncHandler(cartController.clearCart));
 
 export default router;

@@ -20,7 +20,7 @@ describe("PATCH /api/v1/cart/items/:id", () => {
     const { accessToken, user } = await createCustomer();
 
     const categoryResult = await pool.query(
-       `
+      `
       INSERT INTO categories(name)
       VALUES ($1)
       RETURNING id;

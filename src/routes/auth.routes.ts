@@ -4,12 +4,21 @@ import authController from "../controllers/auth.controller";
 import validate from "../middlewares/validate.middleware";
 import { loginSchema, registerSchema } from "../validators/auth.validator";
 import authenticate from "../middlewares/auth.middleware";
+import { asyncHandler } from "../middlewares/async-handler.middleware";
 
 const router = Router();
 
-router.post("/register", validate(registerSchema), authController.register);
-router.post("/login", validate(loginSchema), authController.login);
-router.post("/refresh", authController.refreshToken);
-router.post("/logout", authController.logout);
-router.get("/me", authenticate, authController.me);
+router.post(
+  "/register",
+  validate(registerSchema),
+  asyncHandler(authController.register),
+);
+router.post(
+  "/login",
+  validate(loginSchema),
+  asyncHandler(authController.login),
+);
+router.post("/refresh", asyncHandler(authController.refreshToken));
+router.post("/logout", asyncHandler(authController.logout));
+router.get("/me", authenticate, asyncHandler(authController.me));
 export default router;
