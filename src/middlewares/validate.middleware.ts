@@ -19,6 +19,18 @@ const validate = <T extends z.ZodTypeAny>(schema: T) => {
       );
     }
 
+    const data = result.data as Record<string, unknown>;
+
+    if (data.body !== undefined) {
+      req.body = data.body;
+    }
+    if (data.query !== undefined) {
+      req.query = data.query as typeof req.query;
+    }
+    if (data.params !== undefined) {
+      req.params = data.params as typeof req.params;
+    }
+
     next();
   };
 };

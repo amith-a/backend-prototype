@@ -16,6 +16,12 @@
 - app.ts / server.ts
 - tsconfig.json
 
+### Concepts Learned
+
+- Project bootstrapping
+- TypeScript configuration
+- Environment management
+
 ---
 
 # Sprint 2 — Core Infrastructure ✅
@@ -32,6 +38,11 @@
 - Redis
 - Docker Compose
 
+### Concepts Learned
+
+- Configuration management
+- Database connection lifecycle
+
 ---
 
 # Sprint 3 — Database Design ✅
@@ -45,7 +56,15 @@
 - Constraints
 - Foreign Keys
 - Indexes
-- Raw SQL migrations
+- Raw SQL Migrations
+- Seed scripts
+
+### Concepts Learned
+
+- Relational modelling
+- Constraints
+- Indexes
+- Migration strategy
 
 ---
 
@@ -61,33 +80,36 @@
 - Validation
 - Global Error Handling
 
+### Concepts Learned
+
+- Layered architecture
+- Separation of concerns
+
 ---
 
 # Sprint 5 — Authentication ✅
 
 ## Completed
 
-- Register
-- Login
+- Register / Login
 - JWT Access Tokens
 - Refresh Tokens
 - Refresh Token Rotation
-- Session Revocation
-- GET /auth/me
+- Refresh Sessions
 - Logout
+- GET /auth/me
 - Authentication Middleware
 - Authorization Middleware
 - HttpOnly Cookies
 - Transaction-based Refresh Rotation
+- Comprehensive Integration Tests
 
-### Testing
+### Concepts Learned
 
-- Register
-- Login
-- Refresh
-- Logout
-- GET /me
-- Middleware coverage
+- JWT
+- RBAC
+- Session management
+- Transactions
 
 ---
 
@@ -95,48 +117,41 @@
 
 ## Completed
 
-### Database
-
-- Categories migration
-- Category indexes
-
-### API
-
-- Create Category
-- List Categories
-- Get Category
-- Update Category
-- Delete Category
-
-### Architecture
-
-- Repository
-- Service
-- Controller
+- Category CRUD
+- Repository / Service / Controller
 - Routes
 - Validators
+- Authentication & Authorization
+- Comprehensive Integration Tests
 
-### Security
+### Concepts Learned
 
-- Authentication
-- Role-based Authorization (Admin)
-
-### Testing
-
-- Comprehensive integration tests
-- Auth helper for tests
-- CRUD endpoint coverage
+- CRUD architecture
+- Validation
+- Integration testing
 
 ---
 
-# Sprint 7 — Product Module 🚧
+# Sprint 7 — Product Module ✅
 
-## Planned
+## Completed
 
 - Product CRUD
-- Category relationship
+- Category Relationship
+- Pagination
+- Searching
+- Filtering
+- Sorting
+- Comprehensive Integration Tests
+
+## Deferred
+
 - Product Images
 - Inventory
+
+### Concepts Learned
+
+- Dynamic SQL
 - Pagination
 - Filtering
 - Searching
@@ -146,20 +161,19 @@
 
 # Sprint 8 — Cart Module
 
-- Cart Operations
+- Cart CRUD
 - Quantity Validation
 - Price Calculation
-
----
+- Cart Totals
+- Integration Tests
 
 # Sprint 9 — Orders
 
 - Transactions
-- Stock Validation
 - Order Creation
 - Order Items
-
----
+- Stock Validation
+- Integration Tests
 
 # Sprint 10 — Redis
 
@@ -167,43 +181,42 @@
 - TTL
 - Cache Invalidation
 
----
-
 # Sprint 11 — BullMQ
 
 - Background Jobs
 - Workers
 - Retry
-- Notifications
-
----
 
 # Sprint 12 — Docker
 
 - Dockerfile
 - Docker Compose
-
----
+- Multi-stage Builds
 
 # Sprint 13 — Deployment
 
-- EC2
-- Railway / Render
+- EC2 / Railway / Render
 - Nginx
 - HTTPS
 - PM2
 
----
-
 # Sprint 14 — Production Hardening
 
-- Swagger / OpenAPI
+- Complete Swagger / OpenAPI Documentation
 - Structured Logging
+- Graceful Shutdown
 - Rate Limiting
 - Compression
 - Monitoring
-- Graceful Shutdown
 - Performance Tuning
+
+# Sprint 15 — Optional Enhancements
+
+- Product Images
+- Inventory
+- Reviews
+- Wishlist
+- Coupons
 
 ---
 
@@ -213,16 +226,31 @@
 
 - Authentication Module
 - Category Module
+- Product Module
 - Integration Test Infrastructure
 - Test Helpers
 - 95%+ Test Coverage
 
 ## Next
 
-- Product Module
-- Swagger Documentation (entire API)
-- Docker
-- Deployment
+1. Cart Module
+2. Orders
+3. Redis
+4. BullMQ
+5. Docker
+6. Deployment
+7. Production Hardening
+
+---
+
+# Definition of Done
+
+- Feature implemented
+- Integration tests written
+- Manual API testing completed
+- Coverage checked
+- Code reviewed
+- Commit created
 
 ---
 
@@ -233,12 +261,17 @@
 - Controller handles HTTP only.
 - DTOs define API contracts.
 - Types define internal models.
-- Parameterized SQL everywhere.
-- Transactions for multi-step operations.
+- Use parameterized SQL everywhere.
+- Use transactions for multi-step operations.
 - Hash passwords with bcrypt.
 - Hash refresh tokens with SHA-256.
 - Stateless access tokens.
 - Stateful refresh sessions.
+- Validate input at the API boundary.
+- Keep controllers thin.
+- Prefer composition over duplication.
 - Write integration tests for every endpoint.
 - Finish implementation before refactoring.
-- Use Arrange → Act → Assert for tests.
+- Use Arrange → Act → Assert.
+- Complete one module before starting another.
+- Prefer learning new backend concepts before extending existing CRUD modules.

@@ -5,14 +5,16 @@ import cookieParser from "cookie-parser";
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./docs/swagger";
 
-import authRoutes from "./routes/auth.routes";
-import categoryRoutes from "./routes/category.routes";
-import productRoutes from "./routes/product.routes";
-
 import errorMiddleware from "./middlewares/error.middleware";
 import requestLogger from "./middlewares/requestLogger.middleware";
 
+import authRoutes from "./routes/auth.routes";
+import categoryRoutes from "./routes/category.routes";
+import productRoutes from "./routes/product.routes";
+import cartRoutes from "./routes/cart.routes";
+
 import env from "./config/env";
+
 const app = express();
 
 if (env.NODE_ENV !== "test") {
@@ -38,6 +40,8 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/categories", categoryRoutes);
 
 app.use("/api/v1/products", productRoutes);
+
+app.use("/api/v1/cart", cartRoutes);
 
 app.use((_req, res) => {
   res.status(404).json({
