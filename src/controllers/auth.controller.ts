@@ -6,8 +6,10 @@ import AppError from "../errors/app-error";
 import { refreshCookieOptions } from "../config/cookie";
 
 class AuthController {
-  login = async (req: Request<{}, {}, LoginUserDto>, res: Response) => {
-    const { refreshToken, ...response } = await authService.login(req.body);
+  login = async (req: Request, res: Response) => {
+    const body = req.validated.body as LoginUserDto;
+
+    const { refreshToken, ...response } = await authService.login(body);
 
     res.cookie("refreshToken", refreshToken, refreshCookieOptions);
 
@@ -49,8 +51,10 @@ class AuthController {
     return res.sendStatus(204);
   };
 
-  register = async (req: Request<{}, {}, RegisterUserDto>, res: Response) => {
-    const user = await authService.register(req.body);
+  register = async (req: Request, res: Response) => {
+    const body = req.validated.body as RegisterUserDto;
+
+    const user = await authService.register(body);
 
     return res.status(201).json({
       success: true,

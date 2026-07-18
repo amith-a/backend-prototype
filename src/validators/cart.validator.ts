@@ -15,7 +15,7 @@ export const addCartItemSchema = z.object({
 
 export const updateCartItemSchema = z.object({
   params: z.object({
-    productId: z.uuid("Invalid category id"),
+    productId: z.uuid("Invalid product id"),
   }),
 
   body: z.object({
@@ -28,6 +28,6 @@ export const updateCartItemSchema = z.object({
 
 export const removeCartItemSchema = z.object({
   params: z.object({
-    productId: z.uuid("Invalid category id"),
+    productId: z.uuid("Invalid product id"),
   }),
 });

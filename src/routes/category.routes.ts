@@ -33,7 +33,6 @@ router.post(
 router.patch(
   "/:id",
   authorize([Role.ADMIN]),
-  validate(getCategorySchema),
   validate(updateCategorySchema),
   asyncHandler(categoryController.update),
 );

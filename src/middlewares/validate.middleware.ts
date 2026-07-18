@@ -1,9 +1,11 @@
 import { NextFunction, Request, Response } from "express";
 import { z } from "zod";
+
 import AppError from "../errors/app-error";
 
-const validate = <T extends z.ZodTypeAny>(schema: T) => {
-  return (req: Request, _res: Response, next: NextFunction) => {
+const validate =
+  <T extends z.ZodTypeAny>(schema: T) =>
+  (req: Request, _res: Response, next: NextFunction) => {
     const result = schema.safeParse({
       body: req.body,
       params: req.params,
@@ -19,20 +21,9 @@ const validate = <T extends z.ZodTypeAny>(schema: T) => {
       );
     }
 
-    const data = result.data as Record<string, unknown>;
-
-    if (data.body !== undefined) {
-      req.body = data.body;
-    }
-    if (data.query !== undefined) {
-      req.query = data.query as typeof req.query;
-    }
-    if (data.params !== undefined) {
-      req.params = data.params as typeof req.params;
-    }
+    req.validated = result.data as Request["validated"];
 
     next();
   };
-};
 
 export default validate;

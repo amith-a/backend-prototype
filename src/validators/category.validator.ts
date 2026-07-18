@@ -11,6 +11,9 @@ export const createCategorySchema = z.object({
 });
 
 export const updateCategorySchema = z.object({
+  params: z.object({
+    id: z.uuid("Invalid category id"),
+  }),
   body: z
     .object({
       name: z

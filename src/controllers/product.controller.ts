@@ -2,10 +2,13 @@ import { Request, Response } from "express";
 
 import productService from "../services/product.service";
 import { ListProductsDto } from "../dto/product/list-products.dto";
+import { CreateProductDto } from "../dto/product/create-product.dto";
+import { UpdateProductDto } from "../dto/product/update-product.dto";
 
 class ProductController {
   create = async (req: Request, res: Response) => {
-    const product = await productService.create(req.body);
+    const body = req.validated.body as CreateProductDto;
+    const product = await productService.create(body);
 
     return res.status(201).json({
       success: true,
@@ -14,8 +17,10 @@ class ProductController {
     });
   };
 
-  getById = async (req: Request<{ id: string }>, res: Response) => {
-    const product = await productService.getById(req.params.id);
+  getById = async (req: Request, res: Response) => {
+    const { id } = req.validated.params as { id: string };
+
+    const product = await productService.getById(id);
 
     return res.status(200).json({
       success: true,
@@ -24,9 +29,9 @@ class ProductController {
   };
 
   getAll = async (req: Request, res: Response) => {
-    const result = await productService.getAll(
-      req.query as unknown as ListProductsDto,
-    );
+    const query = req.validated.query as ListProductsDto;
+
+    const result = await productService.getAll(query);
 
     return res.status(200).json({
       success: true,
@@ -34,8 +39,11 @@ class ProductController {
     });
   };
 
-  update = async (req: Request<{ id: string }>, res: Response) => {
-    const product = await productService.update(req.params.id, req.body);
+  update = async (req: Request, res: Response) => {
+    const { id } = req.validated.params as { id: string };
+    const body = req.validated.body as UpdateProductDto;
+
+    const product = await productService.update(id, body);
 
     return res.status(200).json({
       success: true,
@@ -44,8 +52,10 @@ class ProductController {
     });
   };
 
-  delete = async (req: Request<{ id: string }>, res: Response) => {
-    await productService.delete(req.params.id);
+  delete = async (req: Request, res: Response) => {
+    const { id } = req.validated.params as { id: string };
+
+    await productService.delete(id);
 
     return res.sendStatus(204);
   };
