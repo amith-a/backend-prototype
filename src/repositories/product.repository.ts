@@ -1,9 +1,11 @@
+import { Pool, PoolClient } from "pg";
 import pool from "../config/postgres";
 import { CreateProductDto } from "../dto/product/create-product.dto";
 import { ListProductsDto } from "../dto/product/list-products.dto";
 import { UpdateProductDto } from "../dto/product/update-product.dto";
 import { PaginatedResult } from "../types/pagination.types";
 import { Product } from "../types/product.types";
+import AppError from "../errors/app-error";
 
 class ProductRepository {
   async create(dto: CreateProductDto): Promise<Product> {
@@ -301,6 +303,29 @@ class ProductRepository {
       createdAt: row.created_at,
       updatedAt: row.updated_at,
     };
+  }
+
+  async decreaseStock(
+    productId: string,
+    quantity: number,
+    client: Pool | PoolClient = pool,
+  ): Promise<void> {
+    const query = `
+    UPDATE products
+    SET
+      stock = stock - $1,
+      updated_at = NOW()
+    WHERE
+      id = $2
+      AND stock >= $1
+    RETURNING id;
+  `;
+
+    const result = await client.query(query, [quantity, productId]);
+
+    if (result.rowCount === 0) {
+      throw new AppError("Insufficient stock", 400);
+    }
   }
 
   async delete(productId: string): Promise<void> {

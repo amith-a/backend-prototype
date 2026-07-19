@@ -12,6 +12,7 @@ import authRoutes from "./routes/auth.routes";
 import categoryRoutes from "./routes/category.routes";
 import productRoutes from "./routes/product.routes";
 import cartRoutes from "./routes/cart.routes";
+import orderRoutes from "./routes/order.routes";
 
 import env from "./config/env";
 
@@ -42,6 +43,8 @@ app.use("/api/v1/categories", categoryRoutes);
 app.use("/api/v1/products", productRoutes);
 
 app.use("/api/v1/cart", cartRoutes);
+
+app.use("/api/v1/orders", orderRoutes);
 
 app.use((_req, res) => {
   res.status(404).json({

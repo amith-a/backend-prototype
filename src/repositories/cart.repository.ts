@@ -1,3 +1,4 @@
+import { Pool, PoolClient } from "pg";
 import pool from "../config/postgres";
 import { AddCartItemDto } from "../dto/cart/cart.dto";
 import { Cart, CartItem, CartProduct } from "../types/cart.type";
@@ -158,14 +159,17 @@ class CartRepository {
     await pool.query(query, [itemId, cartId]);
   }
 
-  async clearCart(cartId: string): Promise<void> {
+  async clearCart(
+    cartId: string,
+    client: Pool | PoolClient = pool,
+  ): Promise<void> {
     const query = `
     DELETE
     FROM cart_items
     WHERE cart_id = $1;
   `;
 
-    await pool.query(query, [cartId]);
+    await client.query(query, [cartId]);
   }
 
   async getItems(cartId: string): Promise<CartProduct[]> {

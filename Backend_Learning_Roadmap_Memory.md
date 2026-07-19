@@ -142,6 +142,7 @@
 - Searching
 - Filtering
 - Sorting
+- Express 5 Validation (`req.validated`)
 - Comprehensive Integration Tests
 
 ## Deferred
@@ -156,67 +157,132 @@
 - Filtering
 - Searching
 - Sorting
+- Request validation pipeline
+- Express 5 request lifecycle
 
 ---
 
-# Sprint 8 — Cart Module
+# Sprint 8 — Cart Module ✅
+
+## Completed
 
 - Cart CRUD
+- Lazy Cart Creation
+- Add Item
+- Update Item Quantity
+- Remove Item
+- Clear Cart
 - Quantity Validation
 - Price Calculation
 - Cart Totals
-- Integration Tests
+- Authentication
+- Comprehensive Integration Tests
+
+### Concepts Learned
+
+- Cart lifecycle
+- Aggregate calculations
+- Business rule validation
+- Service orchestration
+- Integration testing
+
+---
 
 # Sprint 9 — Orders
 
-- Transactions
-- Order Creation
-- Order Items
+## Planned
+
+- Order Checkout
+- Orders Table
+- Order Items Table
+- PostgreSQL Transactions
 - Stock Validation
+- Stock Deduction
+- Cart Clearing
+- Order History
+- Order Details
 - Integration Tests
+
+### Concepts to Learn
+
+- ACID Transactions
+- Transaction boundaries
+- Rollback strategies
+- Inventory consistency
+
+---
 
 # Sprint 10 — Redis
 
-- Cache Aside
+## Planned
+
+- Cache Aside Pattern
 - TTL
 - Cache Invalidation
+- Product Cache
+- Category Cache
+
+---
 
 # Sprint 11 — BullMQ
 
+## Planned
+
 - Background Jobs
 - Workers
-- Retry
+- Retry Strategy
+- Delayed Jobs
+
+---
 
 # Sprint 12 — Docker
+
+## Planned
 
 - Dockerfile
 - Docker Compose
 - Multi-stage Builds
+- Development Containers
+
+---
 
 # Sprint 13 — Deployment
 
+## Planned
+
 - EC2 / Railway / Render
-- Nginx
+- Nginx Reverse Proxy
 - HTTPS
 - PM2
+- Environment Configuration
+
+---
 
 # Sprint 14 — Production Hardening
 
-- Complete Swagger / OpenAPI Documentation
-- Structured Logging
+## Planned
+
+- Swagger / OpenAPI Documentation
+- Structured Logging (Pino)
 - Graceful Shutdown
 - Rate Limiting
 - Compression
+- Security Headers
 - Monitoring
 - Performance Tuning
 
+---
+
 # Sprint 15 — Optional Enhancements
 
+## Planned
+
 - Product Images
-- Inventory
+- Inventory Management
 - Reviews
 - Wishlist
 - Coupons
+- Search Suggestions
 
 ---
 
@@ -227,30 +293,37 @@
 - Authentication Module
 - Category Module
 - Product Module
+- Cart Module
+- Express 5 Validation Pipeline
+- Repository → Service → Controller Architecture
+- PostgreSQL Integration
+- JWT Authentication
+- Refresh Token Rotation
+- RBAC
 - Integration Test Infrastructure
 - Test Helpers
 - 95%+ Test Coverage
 
-## Next
+## Next Milestone
 
-1. Cart Module
-2. Orders
-3. Redis
-4. BullMQ
-5. Docker
-6. Deployment
-7. Production Hardening
+1. Orders Module
+2. Redis
+3. BullMQ
+4. Docker
+5. Deployment
+6. Production Hardening
 
 ---
 
 # Definition of Done
 
 - Feature implemented
+- Validation added
 - Integration tests written
 - Manual API testing completed
-- Coverage checked
 - Code reviewed
 - Commit created
+- Documentation updated
 
 ---
 
@@ -261,17 +334,40 @@
 - Controller handles HTTP only.
 - DTOs define API contracts.
 - Types define internal models.
+- Validate input at the API boundary.
+- Store validated request data in `req.validated` (Express 5).
+- Keep controllers thin.
 - Use parameterized SQL everywhere.
 - Use transactions for multi-step operations.
 - Hash passwords with bcrypt.
 - Hash refresh tokens with SHA-256.
 - Stateless access tokens.
 - Stateful refresh sessions.
-- Validate input at the API boundary.
-- Keep controllers thin.
 - Prefer composition over duplication.
 - Write integration tests for every endpoint.
 - Finish implementation before refactoring.
 - Use Arrange → Act → Assert.
 - Complete one module before starting another.
 - Prefer learning new backend concepts before extending existing CRUD modules.
+
+---
+
+# Overall Progress
+
+| Sprint                   | Status |
+| ------------------------ | ------ |
+| 1. Foundation            | ✅     |
+| 2. Infrastructure        | ✅     |
+| 3. Database Design       | ✅     |
+| 4. Architecture          | ✅     |
+| 5. Authentication        | ✅     |
+| 6. Categories            | ✅     |
+| 7. Products              | ✅     |
+| 8. Cart                  | ✅     |
+| 9. Orders                | ⏳     |
+| 10. Redis                | ⏳     |
+| 11. BullMQ               | ⏳     |
+| 12. Docker               | ⏳     |
+| 13. Deployment           | ⏳     |
+| 14. Production Hardening | ⏳     |
+| 15. Enhancements         | ⏳     |
