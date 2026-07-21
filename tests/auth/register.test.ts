@@ -3,12 +3,7 @@ import request from "supertest";
 import app from "../../src/app";
 import pool from "../../src/config/postgres";
 
-
 describe("POST /api/v1/auth/register", () => {
-  
-
-  
-
   it("should register a new user successfully", async () => {
     // Arrange
     const payload = {

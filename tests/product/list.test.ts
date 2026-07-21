@@ -8,10 +8,6 @@ import { createAdmin } from "../helpers/auth";
 import { Product } from "../../src/types/product.types";
 
 describe("GET /api/v1/products", () => {
-  
-
-  
-
   it("should return paginated products", async () => {
     // Arrange
     const { accessToken } = await createAdmin();

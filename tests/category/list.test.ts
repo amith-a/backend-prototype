@@ -2,14 +2,9 @@ import request from "supertest";
 
 import app from "../../src/app";
 
-
 import { createAdmin } from "../helpers/auth";
 
 describe("POST /api/v1/categories", () => {
-  
-
-  
-
   it("should return all categories", async () => {
     // Arrange
     const { accessToken } = await createAdmin();

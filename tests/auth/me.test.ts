@@ -2,11 +2,7 @@
 import request from "supertest";
 import app from "../../src/app";
 
-
 describe("GET /api/v1/auth/me", () => {
-  
-  
-
   it("should return current authenticated user", async () => {
     // Arrange
     const payload = {

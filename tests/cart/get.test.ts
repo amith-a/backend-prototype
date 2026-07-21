@@ -5,10 +5,6 @@ import { createCustomer } from "../helpers/auth";
 import pool from "../../src/config/postgres";
 
 describe("GET /api/v1/cart", () => {
-  
-
-  
-
   it("should return an empty cart", async () => {
     // Arrange
     const { accessToken } = await createCustomer();

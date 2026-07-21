@@ -5,12 +5,7 @@ import pool from "../../src/config/postgres";
 
 import { createCustomer } from "../helpers/auth";
 
-
 describe("POST /api/v1/cart/items", () => {
-  
-
-  
-
   it("should add item to cart successfully", async () => {
     // Arrange
     const { accessToken } = await createCustomer();

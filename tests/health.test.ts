@@ -1,11 +1,7 @@
 import request from "supertest";
 import app from "../src/app";
 
-
 describe("GET /api/v1/health", () => {
-  
-
-  
   it("should return application health status", async () => {
     const response = await request(app).get("/api/v1/health");
 

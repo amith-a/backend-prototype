@@ -1,12 +1,11 @@
-# Backend Learning Roadmap (Memory File)
+# Backend Learning Roadmap v2
 
-> Goal: Build a production-ready backend using Node.js, TypeScript, Express, PostgreSQL, and raw SQL while learning real backend engineering practices.
+> This roadmap is an improved version of the original, preserving the
+> sprint structure while expanding the learning topics.
 
----
+## Sprint 1 --- Project Foundation ✅
 
-# Sprint 1 — Project Foundation ✅
-
-## Completed
+### Completed
 
 - TypeScript
 - Express
@@ -24,16 +23,16 @@
 
 ---
 
-# Sprint 2 — Core Infrastructure ✅
+## Sprint 2 --- Core Infrastructure ✅
 
-## Completed
+### Completed
 
 - Zod environment validation
 - PostgreSQL connection pool
 - Singleton configuration
 - Database connectivity
 
-## Deferred
+### Deferred
 
 - Redis
 - Docker Compose
@@ -45,9 +44,9 @@
 
 ---
 
-# Sprint 3 — Database Design ✅
+## Sprint 3 --- Database Design ✅
 
-## Completed
+### Completed
 
 - Users
 - Roles
@@ -59,358 +58,189 @@
 - Raw SQL Migrations
 - Seed scripts
 
-### Concepts Learned
+### Learn Next
 
-- Relational modelling
-- Constraints
-- Indexes
-- Migration strategy
+- Composite Indexes
+- Partial Indexes
+- Covering Indexes
+- EXPLAIN ANALYZE
+- Query Optimization
+- Cursor Pagination
+- Isolation Levels
+- Locking
+- Deadlocks
 
 ---
 
-# Sprint 4 — Architecture ✅
+## Sprint 4 --- Architecture ✅
 
-## Completed
+### Completed
 
 - Repository Pattern
 - Service Layer
 - Controllers
 - DTOs
-- Types
 - Validation
 - Global Error Handling
+- Express 5 Validation Pipeline
 
-### Concepts Learned
+### Learn Next
 
-- Layered architecture
-- Separation of concerns
+- Dependency Injection
+- Factory Pattern
+- Strategy Pattern
 
 ---
 
-# Sprint 5 — Authentication ✅
+## Sprint 5 --- Authentication ✅
 
-## Completed
-
-- Register / Login
-- JWT Access Tokens
-- Refresh Tokens
-- Refresh Token Rotation
-- Refresh Sessions
-- Logout
-- GET /auth/me
-- Authentication Middleware
-- Authorization Middleware
-- HttpOnly Cookies
-- Transaction-based Refresh Rotation
-- Comprehensive Integration Tests
-
-### Concepts Learned
+### Completed
 
 - JWT
+- Refresh Tokens
+- Rotation
 - RBAC
-- Session management
-- Transactions
+- HttpOnly Cookies
+- Integration Tests
 
 ---
 
-# Sprint 6 — Category Module ✅
+## Sprint 6 --- Categories ✅
 
-## Completed
-
-- Category CRUD
-- Repository / Service / Controller
-- Routes
-- Validators
-- Authentication & Authorization
-- Comprehensive Integration Tests
-
-### Concepts Learned
-
-- CRUD architecture
+- CRUD
 - Validation
-- Integration testing
+- Authorization
+- Integration Tests
 
----
+## Sprint 7 --- Products ✅
 
-# Sprint 7 — Product Module ✅
-
-## Completed
-
-- Product CRUD
-- Category Relationship
-- Pagination
-- Searching
+- CRUD
+- Search
 - Filtering
 - Sorting
-- Express 5 Validation (`req.validated`)
-- Comprehensive Integration Tests
+- Pagination
+- Integration Tests
 
-## Deferred
+Deferred: - Product Images - Inventory
+
+## Sprint 8 --- Cart ✅
+
+- Cart Lifecycle
+- Totals
+- Business Rules
+- Integration Tests
+
+## Sprint 9 --- Orders ✅
+
+- Checkout
+- Transactions
+- Stock Validation
+- Order History
+- Order Details
+- Integration Tests
+
+## Sprint 10 --- Redis ✅
+
+Completed: - Cache Aside Pattern - Generic Cache Service - TTL - Prefix
+Invalidation - Cache Consistency
+
+Remaining: - Docker based Integration Tests
+
+## Sprint 11 --- BullMQ ✅
+
+Completed: - Queue Fundamentals - Producer / Consumer - Email Queue -
+Email Worker - Email Processor - Order Confirmation Job - Retry
+Strategy - Exponential Backoff
+
+Remaining: - - Graceful Shutdown - Queue Cleanup - Delayed Jobs - Repeatable Jobs - Bull Board - Dead Letter
+Queue - Idempotency - Integration Tests
+
+## Sprint 12 --- Docker
+
+- Dockerfile
+- Multi-stage Builds
+- Docker Compose
+- API Container
+- Worker Container
+- PostgreSQL
+- Redis
+- Volumes
+- Networks
+- Health Checks
+
+## Sprint 13 --- CI/CD
+
+- GitHub Actions
+- Lint
+- Test
+- Build
+- Docker Build
+- Deployment Pipeline
+
+## Sprint 14 --- Deployment
+
+- EC2
+- Nginx
+- HTTPS
+- SSL
+- Reverse Proxy
+- PM2
+
+## Sprint 15 --- Production Hardening
+
+- Swagger
+- Pino
+- Correlation IDs
+- Health Checks
+- Readiness Checks
+- Rate Limiting
+- Compression
+- Monitoring
+- Metrics
+
+## Sprint 16 --- Security
+
+- CSRF
+- XSS
+- SSRF
+- SQL Injection Review
+- Secrets Management
+
+## Sprint 17 --- Performance
+
+- Event Loop
+- Streams
+- Backpressure
+- Connection Pool Tuning
+- Load Testing
+
+## Sprint 18 --- Future Enhancements
 
 - Product Images
 - Inventory
-
-### Concepts Learned
-
-- Dynamic SQL
-- Pagination
-- Filtering
-- Searching
-- Sorting
-- Request validation pipeline
-- Express 5 request lifecycle
-
----
-
-# Sprint 8 — Cart Module ✅
-
-## Completed
-
-- Cart CRUD
-- Lazy Cart Creation
-- Add Item
-- Update Item Quantity
-- Remove Item
-- Clear Cart
-- Quantity Validation
-- Price Calculation
-- Cart Totals
-- Authentication
-- Comprehensive Integration Tests
-
-### Concepts Learned
-
-- Cart lifecycle
-- Aggregate calculations
-- Business rule validation
-- Service orchestration
-- Integration testing
-
----
-
-# Sprint 9 — Orders ✅
-
-## Completed
-
-- Order Checkout
-- Orders Table
-- Order Items Table
-- PostgreSQL Transactions
-- Stock Validation
-- Stock Deduction
-- Cart Clearing
-- Order History
-- Order Details
-- Comprehensive Integration Tests
-
-### Concepts Learned
-
-- ACID Transactions
-- Transaction boundaries
-- Rollback strategies
-- Inventory consistency
-- Multi-step service orchestration
-- Database transactions
-- Integration testing
-
----
-
-# Sprint 10 — Redis ✅
-
-## Completed
-
-- Install Redis
-- Configure Redis (`ioredis`)
-- Redis Client
-- Generic `CacheService`
-- Cache Aside Pattern
-- TTL
-- Cache Keys
-- Product Cache
-- Category Cache
-- Cache Hit / Miss Logging
-- Cache Invalidation
-- Prefix Invalidation (`SCAN`)
-- Graceful Redis Error Handling
-
-## Deferred
-
-- Redis Integration Tests _(after Docker Compose)_
-
-### Concepts Learned
-
-- In-memory databases
-- Redis connection management
-- Redis data structures
-- Cache Aside Pattern
-- Cache consistency
-- Cache invalidation strategies
-- TTL
-- Serialization / Deserialization
-- Generic cache abstraction
-- Prefix-based invalidation
-- Performance optimization
-
----
-
-# Sprint 11 — BullMQ 🚧
-
-## Completed
-
-- Install BullMQ
-- Project Structure
-- Redis Connection Configuration
-- Queue Fundamentals
-- Queue vs Job
-- Producer vs Consumer
-- Worker Architecture
-- Queue Lifecycle
-- First Queue (`test.queue.ts`)
-
-## Remaining
-
-- First Worker
-- First Processor
-- First Test Job
-- Email Queue
-- Order Confirmation Job
-- Retry Strategy
-- Exponential Backoff
-- Delayed Jobs
-- Job Scheduling
-- Failed Jobs
-- Graceful Shutdown
-- Queue Monitoring (Bull Board)
-- Idempotency
-- Integration Tests
-
-### Concepts Learned
-
-- Background Processing
-- Queues
-- Producers
-- Consumers
-- Worker Architecture
-- Redis as a Job Broker
-- Job Lifecycle
-- Horizontal Scaling
-
----
-
-# Sprint 12 — Docker
-
-## Planned
-
-- Dockerfile
-- Docker Compose
-- Multi-stage Builds
-- Development Containers
-- API Container
-- Worker Container
-- PostgreSQL Container
-- Redis Container
-- Shared Network
-- Environment Configuration
-
-### After Docker
-
-- Redis Integration Tests
-- BullMQ Integration Tests
-- CI-ready Infrastructure
-
----
-
-# Sprint 13 — Deployment
-
-## Planned
-
-- EC2 / Railway / Render
-- Nginx Reverse Proxy
-- HTTPS
-- PM2
-- Environment Configuration
-
----
-
-# Sprint 14 — Production Hardening
-
-## Planned
-
-- Swagger / OpenAPI Documentation
-- Structured Logging (Pino)
-- Graceful Shutdown
-- Rate Limiting
-- Compression
-- Security Headers
-- Monitoring
-- Performance Tuning
-
----
-
-# Sprint 15 — Optional Enhancements
-
-## Planned
-
-- Product Images
-- Inventory Management
 - Reviews
 - Wishlist
 - Coupons
-- Search Suggestions
-
----
-
-# Current Status
-
-## Completed
-
-- Authentication Module
-- Category Module
-- Product Module
-- Cart Module
-- Orders Module
-- Redis Caching
-- Express 5 Validation Pipeline
-- Repository → Service → Controller Architecture
-- PostgreSQL Integration
-- JWT Authentication
-- Refresh Token Rotation
-- RBAC
-- Integration Test Infrastructure
-- Test Helpers
-- 95%+ Test Coverage
-
-## In Progress
-
-- BullMQ
-
----
-
-# Next Milestone
-
-1. Finish BullMQ
-2. Docker Compose
-3. Redis & BullMQ Integration Tests
-4. Deployment
-5. Production Hardening
-6. Optional Enhancements
+- S3 Uploads
+- CDN
 
 ---
 
 # Definition of Done
 
 - Feature implemented
-- Validation added
-- Integration tests written
-- Manual API testing completed
-- Code reviewed
-- Commit created
+- Validation completed
+- Tests passing
+- Manual verification
 - Documentation updated
-
----
 
 # Project Principles
 
+- Thin controllers
+- Business logic in services
+- SQL only in repositories
+- Validate at API boundary
+- Use transactions when required
 - Repository contains SQL only.
 - Service contains business logic only.
 - Controller handles HTTP only.
@@ -432,26 +262,12 @@
 - Complete one module before starting another.
 - Prefer learning new backend concepts before extending existing CRUD modules.
 
----
+- Write integration tests for every endpoint
 
-# Overall Progress
+# Next Milestone
 
-# Overall Progress
-
-| Sprint                   | Status |
-| ------------------------ | ------ |
-| 1. Foundation            | ✅     |
-| 2. Infrastructure        | ✅     |
-| 3. Database Design       | ✅     |
-| 4. Architecture          | ✅     |
-| 5. Authentication        | ✅     |
-| 6. Categories            | ✅     |
-| 7. Products              | ✅     |
-| 8. Cart                  | ✅     |
-| 9. Orders                | ✅     |
-| 10. Redis                | ✅     |
-| 11. BullMQ               | 🚧     |
-| 12. Docker               | ⏳     |
-| 13. Deployment           | ⏳     |
-| 14. Production Hardening | ⏳     |
-| 15. Enhancements         | ⏳     |
+1.  Docker Compose
+2.  Redis/BullMQ Integration Tests
+3.  CI/CD
+4.  Deployment
+5.  Production Hardening

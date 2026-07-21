@@ -5,12 +5,7 @@ import pool from "../../src/config/postgres";
 
 import { createAdmin, createCustomer } from "../helpers/auth";
 
-
 describe("PATCH /api/v1/products/:id", () => {
-  
-
-  
-
   it("should update product successfully", async () => {
     // Arrange
     const { accessToken } = await createAdmin();

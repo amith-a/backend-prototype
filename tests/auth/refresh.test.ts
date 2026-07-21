@@ -5,9 +5,6 @@ import app from "../../src/app";
 import pool from "../../src/config/postgres";
 
 describe("POST /api/v1/auth/refresh", () => {
-  
-  
-
   it("should refresh access token successfully", async () => {
     // Arrange
     const agent = request.agent(app);

@@ -5,12 +5,7 @@ import pool from "../../src/config/postgres";
 
 import { createCustomer } from "../helpers/auth";
 
-
 describe("DELETE /api/v1/cart", () => {
-  
-
-  
-
   it("should clear cart successfully", async () => {
     // Arrange
     const { accessToken, user } = await createCustomer();

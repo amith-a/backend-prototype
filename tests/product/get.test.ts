@@ -5,12 +5,7 @@ import pool from "../../src/config/postgres";
 
 import { createAdmin } from "../helpers/auth";
 
-
 describe("GET /api/v1/products/:id", () => {
-  
-
-  
-
   it("should return product successfully", async () => {
     // Arrange
     const { accessToken } = await createAdmin();

@@ -3,12 +3,7 @@ import request from "supertest";
 import app from "../../src/app";
 import pool from "../../src/config/postgres";
 
-
 describe("POST /api/v1/auth/logout", () => {
-  
-
-  
-
   it("should logout successfully", async () => {
     // Arrange
     const agent = request.agent(app);

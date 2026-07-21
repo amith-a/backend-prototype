@@ -5,12 +5,7 @@ import pool from "../../src/config/postgres";
 
 import { createCustomer } from "../helpers/auth";
 
-
 describe("GET /api/v1/orders", () => {
-  
-
-  
-
   it("should return order history", async () => {
     // Arrange
     const { accessToken, user } = await createCustomer();
