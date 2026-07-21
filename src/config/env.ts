@@ -10,6 +10,7 @@ dotenv.config({
 const envSchema = z.object({
   PORT: z.coerce.number().int().positive().default(5000),
   DATABASE_URL: z.string().min(1),
+  REDIS_URL: z.string().url().min(1),
   NODE_ENV: z
     .enum(["development", "production", "test"])
     .default("development"),

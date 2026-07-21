@@ -5,6 +5,10 @@ import {
 } from "../dto/category/category.dto";
 import { Category } from "../types/category.types";
 import AppError from "../errors/app-error";
+import cacheService from "./cache.service";
+
+const CATEGORY_CACHE_KEY = "categories";
+const CATEGORY_CACHE_TTL = 60 * 5; // 5 minutes
 
 class CategoryService {
   async create(dto: CreateCategoryDto): Promise<Category> {
@@ -14,7 +18,11 @@ class CategoryService {
       throw new AppError("Category already exists", 409);
     }
 
-    return categoryRepository.create(dto);
+    const category = categoryRepository.create(dto);
+
+    await cacheService.del(CATEGORY_CACHE_KEY);
+
+    return category;
   }
 
   async getById(categoryId: string): Promise<Category> {
@@ -28,7 +36,17 @@ class CategoryService {
   }
 
   async getAll(): Promise<Category[]> {
-    return categoryRepository.findAll();
+    const cached = await cacheService.get<Category[]>(CATEGORY_CACHE_KEY);
+
+    if (cached) {
+      return cached;
+    }
+
+    const categories = await categoryRepository.findAll();
+
+    await cacheService.set(CATEGORY_CACHE_KEY, categories, CATEGORY_CACHE_TTL);
+
+    return categories;
   }
 
   async update(categoryId: string, dto: UpdateCategoryDto): Promise<Category> {
@@ -46,7 +64,11 @@ class CategoryService {
       }
     }
 
-    return categoryRepository.update(categoryId, dto);
+    const updatedCategory = await categoryRepository.update(categoryId, dto);
+
+    await cacheService.del(CATEGORY_CACHE_KEY);
+
+    return updatedCategory;
   }
 
   async delete(categoryId: string): Promise<void> {
@@ -57,6 +79,8 @@ class CategoryService {
     }
 
     await categoryRepository.delete(categoryId);
+
+    await cacheService.del(CATEGORY_CACHE_KEY);
   }
 }
 export default new CategoryService();

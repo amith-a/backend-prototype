@@ -188,9 +188,9 @@
 
 ---
 
-# Sprint 9 — Orders
+# Sprint 9 — Orders ✅
 
-## Planned
+## Completed
 
 - Order Checkout
 - Orders Table
@@ -201,37 +201,99 @@
 - Cart Clearing
 - Order History
 - Order Details
-- Integration Tests
+- Comprehensive Integration Tests
 
-### Concepts to Learn
+### Concepts Learned
 
 - ACID Transactions
 - Transaction boundaries
 - Rollback strategies
 - Inventory consistency
+- Multi-step service orchestration
+- Database transactions
+- Integration testing
 
 ---
 
-# Sprint 10 — Redis
+# Sprint 10 — Redis ✅
 
-## Planned
+## Completed
 
+- Install Redis
+- Configure Redis (`ioredis`)
+- Redis Client
+- Generic `CacheService`
 - Cache Aside Pattern
 - TTL
-- Cache Invalidation
+- Cache Keys
 - Product Cache
 - Category Cache
+- Cache Hit / Miss Logging
+- Cache Invalidation
+- Prefix Invalidation (`SCAN`)
+- Graceful Redis Error Handling
+
+## Deferred
+
+- Redis Integration Tests _(after Docker Compose)_
+
+### Concepts Learned
+
+- In-memory databases
+- Redis connection management
+- Redis data structures
+- Cache Aside Pattern
+- Cache consistency
+- Cache invalidation strategies
+- TTL
+- Serialization / Deserialization
+- Generic cache abstraction
+- Prefix-based invalidation
+- Performance optimization
 
 ---
 
-# Sprint 11 — BullMQ
+# Sprint 11 — BullMQ 🚧
 
-## Planned
+## Completed
 
-- Background Jobs
-- Workers
+- Install BullMQ
+- Project Structure
+- Redis Connection Configuration
+- Queue Fundamentals
+- Queue vs Job
+- Producer vs Consumer
+- Worker Architecture
+- Queue Lifecycle
+- First Queue (`test.queue.ts`)
+
+## Remaining
+
+- First Worker
+- First Processor
+- First Test Job
+- Email Queue
+- Order Confirmation Job
 - Retry Strategy
+- Exponential Backoff
 - Delayed Jobs
+- Job Scheduling
+- Failed Jobs
+- Graceful Shutdown
+- Queue Monitoring (Bull Board)
+- Idempotency
+- Integration Tests
+
+### Concepts Learned
+
+- Background Processing
+- Queues
+- Producers
+- Consumers
+- Worker Architecture
+- Redis as a Job Broker
+- Job Lifecycle
+- Horizontal Scaling
 
 ---
 
@@ -243,6 +305,18 @@
 - Docker Compose
 - Multi-stage Builds
 - Development Containers
+- API Container
+- Worker Container
+- PostgreSQL Container
+- Redis Container
+- Shared Network
+- Environment Configuration
+
+### After Docker
+
+- Redis Integration Tests
+- BullMQ Integration Tests
+- CI-ready Infrastructure
 
 ---
 
@@ -294,6 +368,8 @@
 - Category Module
 - Product Module
 - Cart Module
+- Orders Module
+- Redis Caching
 - Express 5 Validation Pipeline
 - Repository → Service → Controller Architecture
 - PostgreSQL Integration
@@ -304,14 +380,20 @@
 - Test Helpers
 - 95%+ Test Coverage
 
-## Next Milestone
+## In Progress
 
-1. Orders Module
-2. Redis
-3. BullMQ
-4. Docker
-5. Deployment
-6. Production Hardening
+- BullMQ
+
+---
+
+# Next Milestone
+
+1. Finish BullMQ
+2. Docker Compose
+3. Redis & BullMQ Integration Tests
+4. Deployment
+5. Production Hardening
+6. Optional Enhancements
 
 ---
 
@@ -354,6 +436,8 @@
 
 # Overall Progress
 
+# Overall Progress
+
 | Sprint                   | Status |
 | ------------------------ | ------ |
 | 1. Foundation            | ✅     |
@@ -364,9 +448,9 @@
 | 6. Categories            | ✅     |
 | 7. Products              | ✅     |
 | 8. Cart                  | ✅     |
-| 9. Orders                | ⏳     |
-| 10. Redis                | ⏳     |
-| 11. BullMQ               | ⏳     |
+| 9. Orders                | ✅     |
+| 10. Redis                | ✅     |
+| 11. BullMQ               | 🚧     |
 | 12. Docker               | ⏳     |
 | 13. Deployment           | ⏳     |
 | 14. Production Hardening | ⏳     |
