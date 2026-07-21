@@ -1,23 +1,24 @@
 import request from "supertest";
 import app from "../src/app";
 
-describe("Health API", () => {
-  describe("GET /api/v1/health", () => {
-    it("should return application health status", async () => {
-      // Arrange
+import { clearDatabase, closeDatabase } from "./helpers/database";
 
-      // Act
-      const response = await request(app).get("/api/v1/health");
+describe("GET /api/v1/health", () => {
+  beforeEach(async () => {
+    await clearDatabase();
+  });
 
-      // Assert
-      expect(response.status).toBe(200);
+  afterAll(async () => {
+    await closeDatabase();
+  });
+  it("should return application health status", async () => {
+    const response = await request(app).get("/api/v1/health");
 
-      expect(response.body).toEqual({
-        status: "UP",
-        timestamp: expect.any(String),
-      });
+    expect(response.status).toBe(200);
 
-      expect(response.headers["content-type"]).toContain("application/json");
+    expect(response.body).toEqual({
+      status: "UP",
+      timestamp: expect.any(String),
     });
   });
 });

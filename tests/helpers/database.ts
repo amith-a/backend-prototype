@@ -1,6 +1,11 @@
 import pool from "../../src/config/postgres";
+import { redis } from "../../src/config/redis";
+import { emailQueue } from "../../src/jobs/queues/email.queue";
 
 export async function clearDatabase(): Promise<void> {
+  if (redis.status === "ready" || redis.status === "connect") {
+    await redis.flushdb();
+  }
   await pool.query(`
     TRUNCATE TABLE
       refresh_sessions,
@@ -16,5 +21,9 @@ export async function clearDatabase(): Promise<void> {
 }
 
 export async function closeDatabase(): Promise<void> {
-  await pool.end();
+  await Promise.all([
+    emailQueue.close(),
+    redis.status !== "end" ? redis.quit() : Promise.resolve(),
+    pool.end(),
+  ]);
 }

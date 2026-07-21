@@ -10,6 +10,8 @@ import {
   OrderHistoryResponse,
 } from "../types/order.types";
 import AppError from "../errors/app-error";
+import { emailQueue } from "../jobs/queues/email.queue";
+import logger from "../config/logger";
 
 class OrderService {
   async create(userId: string): Promise<Order> {
@@ -68,6 +70,25 @@ class OrderService {
       await cartRepository.clearCart(cart.id, client);
 
       await client.query("COMMIT");
+      try {
+        await emailQueue.add(
+          "order-confirmation",
+          {
+            orderId: order.id,
+          },
+          {
+            attempts: 3,
+            backoff: {
+              type: "exponential",
+              delay: 1000,
+            },
+            removeOnComplete: true,
+            removeOnFail: 100,
+          },
+        );
+      } catch (error) {
+        logger.error({ error }, "Failed to enqueue order confirmation email");
+      }
 
       return order;
     } catch (error) {
