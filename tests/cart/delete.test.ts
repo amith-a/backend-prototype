@@ -4,16 +4,12 @@ import app from "../../src/app";
 import pool from "../../src/config/postgres";
 
 import { createCustomer } from "../helpers/auth";
-import { clearDatabase, closeDatabase } from "../helpers/database";
+
 
 describe("DELETE /api/v1/cart/items/:id", () => {
-  beforeEach(async () => {
-    await clearDatabase();
-  });
+  
 
-  afterAll(async () => {
-    await closeDatabase();
-  });
+  
 
   it("should remove cart item successfully", async () => {
     // Arrange

@@ -4,16 +4,12 @@ import app from "../../src/app";
 import pool from "../../src/config/postgres";
 
 import { createCustomer } from "../helpers/auth";
-import { clearDatabase, closeDatabase } from "../helpers/database";
+
 
 describe("POST /api/v1/cart/items", () => {
-  beforeEach(async () => {
-    await clearDatabase();
-  });
+  
 
-  afterAll(async () => {
-    await closeDatabase();
-  });
+  
 
   it("should add item to cart successfully", async () => {
     // Arrange

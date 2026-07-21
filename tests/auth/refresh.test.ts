@@ -1,16 +1,12 @@
 // Starter refresh.test.ts
 import request from "supertest";
 import app from "../../src/app";
-import { clearDatabase, closeDatabase } from "../helpers/database";
+
 import pool from "../../src/config/postgres";
 
 describe("POST /api/v1/auth/refresh", () => {
-  beforeEach(async () => {
-    await clearDatabase();
-  });
-  afterAll(async () => {
-    await closeDatabase();
-  });
+  
+  
 
   it("should refresh access token successfully", async () => {
     // Arrange

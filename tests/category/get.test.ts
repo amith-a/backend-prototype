@@ -2,17 +2,13 @@ import request from "supertest";
 
 import app from "../../src/app";
 
-import { clearDatabase, closeDatabase } from "../helpers/database";
+
 import { createAdmin } from "../helpers/auth";
 
 describe("POST /api/v1/categories", () => {
-  beforeEach(async () => {
-    await clearDatabase();
-  });
+  
 
-  afterAll(async () => {
-    await closeDatabase();
-  });
+  
 
   it("should return category by id", async () => {
     // Arrange

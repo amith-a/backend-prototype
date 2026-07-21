@@ -5,17 +5,13 @@ import pool from "../../src/config/postgres";
 
 import { createCustomer } from "../helpers/auth";
 
-import { clearDatabase, closeDatabase } from "../helpers/database";
+
 import { randomUUID } from "crypto";
 
 describe("GET /api/v1/orders/:id", () => {
-  beforeEach(async () => {
-    await clearDatabase();
-  });
+  
 
-  afterAll(async () => {
-    await closeDatabase();
-  });
+  
 
   it("should return order details", async () => {
     // Arrange

@@ -1,15 +1,11 @@
 // Starter me.test.ts
 import request from "supertest";
 import app from "../../src/app";
-import { clearDatabase, closeDatabase } from "../helpers/database";
+
 
 describe("GET /api/v1/auth/me", () => {
-  beforeEach(async () => {
-    await clearDatabase();
-  });
-  afterAll(async () => {
-    await closeDatabase();
-  });
+  
+  
 
   it("should return current authenticated user", async () => {
     // Arrange

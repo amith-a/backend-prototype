@@ -4,16 +4,12 @@ import app from "../../src/app";
 import pool from "../../src/config/postgres";
 
 import { createAdmin, createCustomer } from "../helpers/auth";
-import { clearDatabase, closeDatabase } from "../helpers/database";
+
 
 describe("POST /api/v1/products", () => {
-  beforeEach(async () => {
-    await clearDatabase();
-  });
+  
 
-  afterAll(async () => {
-    await closeDatabase();
-  });
+  
 
   it("should create product successfully", async () => {
     // Arrange

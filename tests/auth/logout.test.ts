@@ -2,16 +2,12 @@ import request from "supertest";
 
 import app from "../../src/app";
 import pool from "../../src/config/postgres";
-import { clearDatabase, closeDatabase } from "../helpers/database";
+
 
 describe("POST /api/v1/auth/logout", () => {
-  beforeEach(async () => {
-    await clearDatabase();
-  });
+  
 
-  afterAll(async () => {
-    await closeDatabase();
-  });
+  
 
   it("should logout successfully", async () => {
     // Arrange

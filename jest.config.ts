@@ -20,6 +20,8 @@ const config: Config = {
 
   clearMocks: true,
 
+  setupFilesAfterEnv: ["<rootDir>/tests/setup.ts"],
+
   collectCoverageFrom: ["src/**/*.ts", "!src/**/*.d.ts", "!src/server.ts"],
 };
 

@@ -4,17 +4,13 @@ import app from "../../src/app";
 import pool from "../../src/config/postgres";
 
 import { createAdmin } from "../helpers/auth";
-import { clearDatabase, closeDatabase } from "../helpers/database";
+
 import { Product } from "../../src/types/product.types";
 
 describe("GET /api/v1/products", () => {
-  beforeEach(async () => {
-    await clearDatabase();
-  });
+  
 
-  afterAll(async () => {
-    await closeDatabase();
-  });
+  
 
   it("should return paginated products", async () => {
     // Arrange
