@@ -1,4 +1,4 @@
-import env from "../src/config/env";
+import env from "./config/env";
 import app from "./app";
 import logger from "./config/logger";
 import pool from "./config/postgres";

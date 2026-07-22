@@ -1,0 +1,14 @@
+name: backend-prototype-prod
+
+services:
+
+  postgres:
+    env_file:
+      - .env.prod
+  api:
+    build:
+      target: runtime
+
+    env_file:
+      - .env.prod
+      

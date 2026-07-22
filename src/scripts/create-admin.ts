@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
 import bcrypt from "bcrypt";
-import pool from "../src/config/postgres";
-import env from "../src/config/env";
-import { Role } from "../src/constants/roles";
-import logger from "../src/config/logger";
+import pool from "../config/postgres";
+import env from "../config/env";
+import { Role } from "../constants/roles";
+import logger from "../config/logger";
 
 async function createAdmin() {
   try {
