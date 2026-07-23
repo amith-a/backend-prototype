@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc -p tsconfig.build.json",
-    "start": "node dist/server.js",
+    "start": "npm run db:migrate:prod && node dist/server.js",
+    "db:migrate": "tsx src/db/migrate.ts",
+    "db:migrate:prod": "node dist/db/migrate.js",
+    "db:seed": "tsx src/db/seed.ts",
+    "db:seed:prod": "node dist/db/seed.js",
     "create-admin": "tsx src/scripts/create-admin.ts",
     "create-admin:prod": "node dist/scripts/create-admin.js",
     "lint": "eslint .",

@@ -1,21 +1,20 @@
 name: backend-prototype-dev
 
 services:
-
   postgres:
     env_file:
       - .env
   api:
-
     build:
       target: development
-    command: npm run dev
+    command: >
+      sh -c "npm run db:migrate &&
+             npm run dev"
 
     env_file:
       - .env
 
     develop:
-
       watch:
         - action: sync
           path: .
